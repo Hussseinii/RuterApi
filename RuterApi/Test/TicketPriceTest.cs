@@ -12,81 +12,60 @@ namespace RuterApi.Test
             _sut = new TicketPriceService();
         }
 
-        [Fact]
-        public void CalculatePrice_shouldReturnCorrectPriceForZoneOne_WhenPersonIsAdult()
+        [Theory]
+        [InlineData(1, 40)]
+        [InlineData(2, 66)]
+        [InlineData(3, 92)]
+        [InlineData(4, 118)]
+        public void CalculatePrice_ShouldReturnCorrectPriceForEachZone_WhenPersonIsAdult(int zone, decimal expected)
         {
-            int zone = 1;
             var person = new Person(31);
 
             var result = _sut.CalculatePrice(person, zone);
 
-            Assert.Equal(40, result);
+            Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void CalculatePrice_shouldReturnCorrectPriceForZoneTo_WhenPersonIsAdult()
+        [Theory]
+        [InlineData(1, 16)]
+        [InlineData(2, 25.6)]
+        [InlineData(3, 36)]
+        [InlineData(4, 45.6)]
+        public void CalculatePrice_ShouldReturnCorrectPriceForEachZone_WhenPersonIsChild(int zone, decimal expected)
         {
-            int zone = 2;
-            var person = new Person(31);
-
-            var result = _sut.CalculatePrice(person, zone);
-
-            Assert.Equal(80, result);
-        }
-
-        [Fact]
-        public void CalculatePrice_shouldReturnCorrectPriceForZoneOne_WhenPersonIsChild()
-        {
-            int zone = 1;
             var person = new Person(7);
 
             var result = _sut.CalculatePrice(person, zone);
 
-            Assert.Equal(16, result);
+            Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void CalculatePrice_shouldReturnCorrectPriceForZoneTo_WhenPersonIsChild()
+        [Theory]
+        [InlineData(1, 20)]
+        [InlineData(2, 32)]
+        [InlineData(3, 45)]
+        [InlineData(4, 57)]
+        public void CalculatePrice_ShouldReturnCorrectPriceForEachZone_WhenPersonIsHunnor(int zone, decimal expected)
         {
-            int zone = 2;
-            var person = new Person(7);
-
-            var result = _sut.CalculatePrice(person, zone);
-
-            Assert.Equal(32, result);
-        }
-
-        [Fact]
-        public void CalculatePrice_shouldReturnCorrectPriceForZoneOne_WhenPersonIsHunnor()
-        {
-            int zone = 1;
             var person = new Person(77);
 
             var result = _sut.CalculatePrice(person, zone);
 
-            Assert.Equal(20, result);
+            Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void CalculatePrice_shouldReturnCorrectPriceForZoneTo_WhenPersonIsHunnor()
+        [Theory]
+        [InlineData(1, 16)]
+        [InlineData(2, 25.6)]
+        [InlineData(3, 36)]
+        [InlineData(4, 45.6)]
+        public void CalculatePrice_ShouldReturnCorrectPrice_WhenPersonIsMilitary(int zone, decimal expected)
         {
-            int zone = 2;
-            var person = new Person(77);
-
-            var result = _sut.CalculatePrice(person, zone);
-
-            Assert.Equal(40, result);
-        }
-
-        [Fact]
-        public void CalculatePrice_shouldReturnCorrectPrice_WhenPersonIsMilitary()
-        {
-            int zone = 1;
             var person = new Person(20,true); ;
 
             var result = _sut.CalculatePrice(person, zone);
 
-            Assert.Equal(20, result);
+            Assert.Equal(expected, result);
         }
 
     }
