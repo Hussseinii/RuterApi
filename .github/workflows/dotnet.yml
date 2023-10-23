@@ -30,40 +30,11 @@ jobs:
     - name: List current directory
       run: ls
     - name: Publish
-      run: dotnet publish RuterApi/RuterApi.csproj -c release -o website
+      run: dotnet publish RuterApi/RuterApi.csproj -c release -o ./publish
     - name: current directory
       run: |
             pwd
-            ls
-    - name: Upload a Build Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        path: website/**
-        if-no-files-found: error
-    - name: current directory
-      run: |
-            pwd
-            ls
-  
-  deploy_staging:
-    needs: build
-    runs-on: ubuntu-latest
-
-    environment:
-      name: PRE-PROD
-      url: ${{ steps.deploywebapp.outputs.webapp-url }}
-
-    steps:
-    - name: current directory
-      run: |
-            pwd
-            ls -R
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: website
-        path: website
-
+            ls 
     - name: Login via Azure CLI
       uses: azure/login@v1
       with:
@@ -74,8 +45,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.app-name }}
-        slot-name: staging
-        package: api
+        package: ./publish
 
     - name: az cli logout
       run: az logout
