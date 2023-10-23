@@ -41,20 +41,6 @@ jobs:
         path: ./publish
         if-no-files-found: error
         
-    - name: Login via Azure CLI
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Deploy web app
-      id: deploywebapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.app-name }}
-        package: ./publish
-
-    - name: az cli logout
-      run: az logout
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -68,5 +54,19 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: artifact
-    - name: Display structure of downloaded files
-      run: ls -R
+    - name: Current directory
+      run: ls
+    - name: Login via Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Ruter Api to Azure
+      id: deployRuterApi
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.app-name }}
+        package: ./artifact
+
+    - name: az cli logout
+      run: az logout
