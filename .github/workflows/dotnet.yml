@@ -40,6 +40,10 @@ jobs:
       with:
         path: api/**
         if-no-files-found: error
+    - name: current directory
+      run: |
+            pwd
+            ls
   
   deploy_staging:
     needs: build
@@ -58,7 +62,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: api
-        path: api
+        path: artifact
 
     - name: Login via Azure CLI
       uses: azure/login@v1
