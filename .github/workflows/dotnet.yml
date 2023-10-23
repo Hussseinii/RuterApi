@@ -50,11 +50,15 @@ jobs:
       url: ${{ steps.deploywebapp.outputs.webapp-url }}
 
     steps:
+    - name: current directory
+      run: |
+            pwd
+            ls
     - name: Download a Build Artifact
       uses: actions/download-artifact@v3
       with:
         name: api
-        path: api
+        path: artifacts/api
 
     - name: Login via Azure CLI
       uses: azure/login@v1
