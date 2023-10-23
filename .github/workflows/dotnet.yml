@@ -35,6 +35,12 @@ jobs:
       run: |
             pwd
             ls 
+    - name: Upload a Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        path: ./publish
+        if-no-files-found: error
+        
     - name: Login via Azure CLI
       uses: azure/login@v1
       with:
@@ -49,3 +55,18 @@ jobs:
 
     - name: az cli logout
       run: az logout
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: STAGING
+      url: ${{ steps.deploywebapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: publish
+    - name: Display structure of downloaded files
+      run: ls -R
