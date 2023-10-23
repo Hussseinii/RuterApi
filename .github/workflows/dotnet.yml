@@ -30,7 +30,7 @@ jobs:
     - name: List current directory
       run: ls
     - name: Publish
-      run: dotnet publish RuterApi/RuterApi.csproj -c release -o Artifacts/api
+      run: dotnet publish RuterApi/RuterApi.csproj -c release -o api
     - name: current directory
       run: |
             pwd
@@ -58,7 +58,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: api
-        path: Artifacts/api
+        path: api
 
     - name: Login via Azure CLI
       uses: azure/login@v1
