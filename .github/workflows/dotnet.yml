@@ -54,8 +54,6 @@ jobs:
       run: |
             pwd
             ls
-            cd api
-            ls
     - name: Download a Build Artifact
       uses: actions/download-artifact@v3
       with:
