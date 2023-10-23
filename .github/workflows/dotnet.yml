@@ -24,6 +24,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build -c Release --no-restore
+    - name: List current directory
+      run: ls
     - name: Publish
       run: dotnet publish RuterApi/RuterApi.csproj -c release -o Artifacts/api
     - name: current directory
