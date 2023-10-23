@@ -38,7 +38,7 @@ jobs:
     - name: Upload a Build Artifacts
       uses: actions/upload-artifact@v3
       with:
-        path: Artifacts/**
+        path: RuterApi/api/**
         if-no-files-found: error
   
   deploy_staging:
