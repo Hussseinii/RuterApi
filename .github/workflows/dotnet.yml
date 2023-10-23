@@ -58,7 +58,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: api
-        path: artifacts/api
+        path: Artifacts/api
 
     - name: Login via Azure CLI
       uses: azure/login@v1
