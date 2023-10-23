@@ -54,11 +54,13 @@ jobs:
       run: |
             pwd
             ls
+            cd api
+            ls
     - name: Download a Build Artifact
       uses: actions/download-artifact@v3
       with:
         name: api
-        path: api
+        path: ./api
 
     - name: Login via Azure CLI
       uses: azure/login@v1
