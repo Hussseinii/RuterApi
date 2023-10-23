@@ -56,7 +56,9 @@ jobs:
       with:
         name: ruterApi
     - name: Current directory
-      run: ls
+      run: |
+            pwd
+            ls 
     - name: Login via Azure CLI
       uses: azure/login@v1
       with:
@@ -67,7 +69,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.app-name }}
-        package: ./ruterApi
+        package: ruterApi
 
     - name: az cli logout
       run: az logout
