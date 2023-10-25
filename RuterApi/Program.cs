@@ -16,7 +16,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/welcome", () =>
 {
-    var message ="Welcome to Ruter Api!\n\nApi Endpoints\n " +
+    var message ="Welcome to Ruter Api ,I'm deployed via GitHub Actions!\n\nApi Endpoints\n " +
                     "/ticketprice: calculate price based on age and zone\n" +
                     " e.g.: /ticketprice?age=31&zone=1";
 
