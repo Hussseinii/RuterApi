@@ -59,6 +59,7 @@ jobs:
     - name: Current directory
       run: |
             pwd
+            ls ./
             ls ./artifact
     - name: Login via Azure CLI
       uses: azure/login@v1
@@ -70,7 +71,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.app-name }}
-        package: ./artifact/ruterApi
+        package: ./ruterApi
 
     - name: az cli logout
       run: az logout
